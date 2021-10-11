@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>V++ Developer Panel</title>
+        <script>
+            if (sessionStorage.getItem("token")) {
+                
+            }
+            else {
+                window.location.href = "login.html";
+            }
+
+            window.onload = function() {
+                document.getElementById("logcode").innerHTML = sessionStorage.getItem("token") + sessionStorage.getItem("username");
+            }
+
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>
