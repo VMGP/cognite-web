@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Cognite Login</title>
+        <link href="styles/login.css" rel="stylesheet" type="text/css">
+        <script>
+          
+            function getUrlVars() {
+    		        var vars = {};
+    		        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        		        vars[key] = value;
+    		        });
+    		        return vars;
+		        }
+
+		        let urlvars = getUrlVars();
+          
+            if (sessionStorage.getItem("token")) {
+                window.location.href = "index.html";
+            }
+
+            function login() {
+                document.getElementById("logcode").innerHTML = "Please wait...";
+                fetch("http://" + urlvars["srvnam"] + ":" + urlvars["srvprt"] + "\1\" + document.getElementById("uname").value + "\" + document.getElementById("pass").value)
+                .then(function (data) {
+                    return data.json().then(function (res) {
+                        var token = res["rtoken"];
+                        sessionStorage.setItem("token", token);
+                        sessionStorage.setItem("username", document.getElementById("uname").value);
+                        window.location.href = "index.html";
+                    }) 
+                })
+                .catch(function(error){
+                    document.getElementById("logcode").innerHTML = "Error: " + error;
+                })
+            }
+
+        </script>
+    </head>
+    <body>
+        <div class="loginpanel" align="center">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1>
+                <font face="Lato" size="6" color="#000">Login</font>
+            </h1>
+        </div>
+        <div class="lcontainer">
+            <label for="uname"><b><font face="Lato">Username</font></b></label>
+            <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+    
+            <br>
+            <br>
+    
+            <label for="psw"><b><font face="Lato">Password</font></b></label>
+            <input type="password" placeholder="Enter Password" name="psw" id="pass" required>
+    
+            <br>
+    
+            <button id="loginbtn" onclick="login()">Login</button>
+        </div>
+        <font face="Lato">
+            <div id="logcode" align="center">
+                
+            </div>
+        </font> 
+    </body>
+</html>
