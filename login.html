@@ -22,7 +22,7 @@
 
             function login() {
                 document.getElementById("logcode").innerHTML = "Please wait...";
-                fetch("https://" + urlvars["srvnam"] + ":" + urlvars["srvprt"] + "/1/" + document.getElementById("uname").value + "/" + document.getElementById("pass").value)
+                fetch("http://" + urlvars["srvnam"] + ":" + urlvars["srvprt"] + "/1/" + document.getElementById("uname").value + "/" + document.getElementById("pass").value)
                 .then(function (data) {
                     return data.json().then(function (res) {
                         var token = res["rtoken"];
