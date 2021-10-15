@@ -1,5 +1,7 @@
 <html>
     <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>Cognite Login</title>
         <link href="login.css" rel="stylesheet" type="text/css">
         <script>
@@ -24,8 +26,10 @@
                 .then(function (data) {
                     return data.json().then(function (res) {
                         var token = res["rtoken"];
-                        sessionStorage.setItem("token", token);
-                        sessionStorage.setItem("username", document.getElementById("uname").value);
+                        if (data == "0") {
+				sessionStorage.setItem("token", document.getElementById("uname").value + document.getElementById("pass").value);
+                        	sessionStorage.setItem("username", document.getElementById("uname").value);
+			}
                         window.location.href = "index.html";
                     }) 
                 })
