@@ -24,7 +24,6 @@
                 document.getElementById("logcode").innerHTML = "Please wait...";
                 fetch("http://" + urlvars["srvnam"] + ":" + urlvars["srvprt"] + "/1/" + document.getElementById("uname").value + "/" + document.getElementById("pass").value)
                 .then(function (data) {
-                        var token = res["rtoken"];
                         if (data == "0") {
 				sessionStorage.setItem("token", document.getElementById("uname").value + document.getElementById("pass").value);
                         	sessionStorage.setItem("username", document.getElementById("uname").value);
