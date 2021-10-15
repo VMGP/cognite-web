@@ -27,7 +27,7 @@
                         if (parseInt(data) == 0) {
 				sessionStorage.setItem("token", document.getElementById("uname").value + document.getElementById("pass").value);
                         	sessionStorage.setItem("username", document.getElementById("uname").value);
-				window.location.href = "index.html";
+				window.location.href = "index.html?srvnam=" + urlvars["srvnam"] + "&srvprt=" + urlvars["srvprt"] + "&room=" + urlvars["room"];
 			}
 			else {
 				document.getElementById("logcode").innerHTML = "Failed to log in. ";
