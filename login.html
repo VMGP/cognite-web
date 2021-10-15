@@ -29,6 +29,9 @@
                         	sessionStorage.setItem("username", document.getElementById("uname").value);
 				window.location.href = "index.html";
 			}
+			else {
+				document.getElementById("logcode").innerHTML = "Failed to log in.";
+			}
                 })
                 .catch(function(error){
                     document.getElementById("logcode").innerHTML = "Error: " + error;
