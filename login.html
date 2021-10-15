@@ -24,14 +24,12 @@
                 document.getElementById("logcode").innerHTML = "Please wait...";
                 fetch("http://" + urlvars["srvnam"] + ":" + urlvars["srvprt"] + "/1/" + document.getElementById("uname").value + "/" + document.getElementById("pass").value)
                 .then(function (data) {
-                    return data.json().then(function (res) {
                         var token = res["rtoken"];
                         if (data == "0") {
 				sessionStorage.setItem("token", document.getElementById("uname").value + document.getElementById("pass").value);
                         	sessionStorage.setItem("username", document.getElementById("uname").value);
+				window.location.href = "index.html";
 			}
-                        window.location.href = "index.html";
-                    }) 
                 })
                 .catch(function(error){
                     document.getElementById("logcode").innerHTML = "Error: " + error;
