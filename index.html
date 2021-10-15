@@ -10,19 +10,54 @@
             }
 
             window.onload = function() {
-                document.getElementById("logcode").innerHTML = sessionStorage.getItem("token") + sessionStorage.getItem("username");
+                
             }
 
         </script>
     </head>
     <body>
-        <div id="chat">
             
-	    <div id="chat-messages">
+	<div id="chat-messages">
 	        <form id="chat-form" method="post">
 		        <input type="text" name="message" placeholder="Enter a message..." maxlength="500" autocomplete="off">
 		        <button type="submit">Send</button>
  	        </form>
         </div>
+	    
+	<div id="chat">
+		
+	</div>
+	<script>
+		function getUrlVars() {
+    		        var vars = {};
+    		        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        		        vars[key] = value;
+    		        });
+    		        return vars;
+            	}
+
+            	let urlvars = getUrlVars();
+		
+		let myHeaders = new Headers();
+			myHeaders.append('authsecret', sessionStorage.getItem("token"));
+
+			const myInit = {
+				method: 'GET',
+				headers: myHeaders,
+				mode: 'cors',
+				cache: 'default'
+			};
+		
+		setInterval(function(){ 
+			fetch("http://" + urlvars["srvnam"] + ":" + urlvars["srvprt"] + "/3/" + urlvars["room"], myInit)
+                	.then(function (data) {
+                        	document.getElementById("chat").innerHTML = data;
+                	})
+                	.catch(function(error){
+                    		document.getElementById("chat").innerHTML = "ERROR";
+                	})
+			
+		}, 1000); 
+	</script>
     </body>
 </html>
